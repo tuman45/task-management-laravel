@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BoardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,18 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home', [
-        "title" => "Home"
-    ]);
-});
-Route::get('/task', function () {
-    return view('task', [
-        "title" => "Task"
-    ]);
-});
-Route::get('/user', function () {
-    return view('user', [
-        "title" => "User"
-    ]);
-});
+Route::get('/', [BoardController::class, 'index']);
+
+Route::get('/{user:user}', [BoardController::class, 'show']);
