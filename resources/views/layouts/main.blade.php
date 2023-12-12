@@ -7,17 +7,17 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
    <!-- Favicon icon-->
-   <link rel="shortcut icon" type="image/x-icon" href="./assets/images/favicon/favicon.ico" />
+   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon/favicon.ico') }}" />
 
    <!-- Libs CSS -->
-
-   <link href="./assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
-   <link href="./assets/libs/dropzone/dist/dropzone.css" rel="stylesheet" />
-   <link href="./assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
-   <link href="./assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet" />
+   <link href="{{ asset('assets/libs/bootstrap-icons/font/bootstrap-icons.css') }}" rel="stylesheet" />
+   <link href="{{ asset('assets/libs/dropzone/dist/dropzone.css') }}" rel="stylesheet" />
+   <link href="{{ asset('assets/libs/@mdi/font/css/materialdesignicons.min.css') }}" rel="stylesheet" />
+   <link href="{{ asset('assets/libs/prismjs/themes/prism-okaidia.css') }}" rel="stylesheet" />
 
    <!-- Theme CSS -->
-   <link rel="stylesheet" href="./assets/css/theme.min.css" />
+   <link rel="stylesheet" href="{{ asset('assets/css/theme.min.css') }}" />
+
    <title>{{ $title }}</title>
 </head>
 
@@ -225,7 +225,7 @@
             <nav class="navbar-classic navbar navbar-expand-lg fixed-top">
                <!-- Brand logo -->
                <a class="navbar-brand pe-5 d-none d-md-block" href="./index.html">
-                  <img src="./assets/images/brand/logo/logo-primary.svg" alt="" />
+                  <img src="{{ asset('assets/images/brand/logo/logo-primary.svg') }}" alt="" />
                </a>
                <a id="nav-toggle" href="#"><i data-feather="menu" class="nav-icon me-2 icon-xs"></i></a>
                <div class="ms-lg-3 d-none d-md-none d-lg-block">
@@ -313,7 +313,8 @@
                      <a class="rounded-circle" href="#" role="button" id="dropdownUser"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="avatar avatar-md avatar-indicators avatar-online">
-                           <img alt="avatar" src="./assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
+                           <img alt="avatar" src="{{ asset('assets/images/avatar/avatar-1.jpg') }}"
+                              class="rounded-circle" />
                         </div>
                      </a>
                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
@@ -368,18 +369,19 @@
 
    <!-- Scripts -->
    <!-- Libs JS -->
-   <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
-   <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-   <script src="./assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-   <script src="./assets/libs/feather-icons/dist/feather.min.js"></script>
-   <script src="./assets/libs/prismjs/prism.js"></script>
-   <script src="./assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-   <script src="./assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-   <script src="./assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-   <script src="./assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+   <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
+   <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+   <script src="{{ asset('assets/libs/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+   <script src="{{ asset('assets/libs/feather-icons/dist/feather.min.js') }}"></script>
+   <script src="{{ asset('assets/libs/prismjs/prism.js') }}"></script>
+   <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+   <script src="{{ asset('assets/libs/dropzone/dist/min/dropzone.min.js') }}"></script>
+   <script src="{{ asset('assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js') }}"></script>
+   <script src="{{ asset('assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js') }}"></script>
 
    <!-- Theme JS -->
-   <script src="./assets/js/theme.min.js"></script>
+   <script src="{{ asset('assets/js/theme.min.js') }}"></script>
+
 </body>
 
 </html>
