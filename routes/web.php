@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +17,6 @@ use App\Http\Controllers\BoardController;
 */
 
 Route::get('/', [BoardController::class, 'index']);
-
-Route::get('/{user:user}', [BoardController::class, 'show']);
+Route::get('/login', [LoginController::class, 'index']);
+Route::get('/{board:board_slug}', [BoardController::class, 'showTask']);
+Route::get('/{board:board_slug}/{task:task_slug}', [TaskController::class, 'showDetail']);
