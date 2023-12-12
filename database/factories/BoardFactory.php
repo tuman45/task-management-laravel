@@ -19,8 +19,7 @@ class BoardFactory extends Factory
         return [
             'user_id' => $this->faker->randomDigit(),
             'board_name' => $this->faker->sentence(mt_rand(1, 4)),
-            'board_slug' => $this->faker->slug(mt_rand(1, 4)),
-            'board_desc' => $this->faker->sentence(5)
+            'board_slug' => $this->faker->slug(mt_rand(1, 4))
         ];
     }
 }

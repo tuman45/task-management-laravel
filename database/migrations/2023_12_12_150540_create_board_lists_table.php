@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('board_lists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
             $table->foreignId('board_id');
-            $table->foreignId('board_list_id');
-            $table->string('task_slug')->unique();
-            $table->string('task_title');
-            $table->text('task_desc')->nullable();
-            $table->timestamp('due_date')->nullable();
+            $table->foreignId('user_id');
+            $table->string('list_name');
+            $table->integer('order');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('board_lists');
     }
 };

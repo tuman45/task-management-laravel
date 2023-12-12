@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('board_slug')->unique();
-            $table->string('board_name')->unique();
-            $table->text('board_desc')->nullable();
+            $table->string('board_name');
             $table->timestamps();
         });
     }
