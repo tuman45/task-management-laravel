@@ -10,17 +10,18 @@ class BoardController extends Controller
 {
     public function index()
     {
-        return view('board', [
+        return view('boards', [
             "title" => "Board",
-            "boards" => Board::where('user_id', 0)->get()
+            "boards" => Board::where('user_id', 9)->get()
         ]);
     }
 
-    public function show(Board $board)
+    public function showTask(Board $board)
     {
-        return view('board', [
-            "title" => "Board",
-            "boards" => $board
+        return view('tasks', [
+            "title" => "Tasks",
+            "board" => $board,
+            "tasks" => $board->tasks
         ]);
     }
 }
