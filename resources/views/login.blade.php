@@ -31,29 +31,40 @@
                <!-- Card body -->
                <div class="card-body p-6">
                   <div class="mb-4">
-                     <a href="../index.html"><img src="../assets/images/brand/logo/logo-primary.svg" class="mb-2" alt=""></a>
+                     <a href="../index.html"><img src="../assets/images/brand/logo/logo-primary.svg" class="mb-2"
+                           alt=""></a>
                      <p class="mb-6">Please enter your user information.</p>
                   </div>
+                  @if (session()->has('loginError'))
+                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ session('loginError') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                     </div>
+                  @endif
                   <!-- Form -->
-                  <form>
+                  <form action="/login" method="post">
+                     @csrf
                      <!-- Username -->
                      <div class="mb-2">
                         <label for="username" class="form-label">Username</label>
-                        <input type="text" id="username" class="form-control @error('username') is-invalid @enderror" name="username" autofocus required value="{{old('username')}}">
+                        <input type="text" id="username"
+                           class="form-control @error('username') is-invalid @enderror" name="username" autofocus
+                           required value="{{ old('username') }}">
                         @error('username')
-                        <div class="invalid-feedback">
-                           {{$message}}
-                        </div>
+                           <div class="invalid-feedback">
+                              {{ $message }}
+                           </div>
                         @enderror
                      </div>
                      <!-- Password -->
                      <div class="mb-2">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" id="password" class="form-control  @error('password') is-invalid @enderror" name="password" required>
+                        <input type="password" id="password"
+                           class="form-control  @error('password') is-invalid @enderror" name="password" required>
                         @error('password')
-                        <div class="invalid-feedback">
-                           {{$message}}
-                        </div>
+                           <div class="invalid-feedback">
+                              {{ $message }}
+                           </div>
                         @enderror
                      </div>
                      <!-- Checkbox -->
