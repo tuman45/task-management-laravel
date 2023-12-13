@@ -19,10 +19,10 @@ class TaskFactory extends Factory
         return [
             'user_id' => $this->faker->randomDigit(),
             'board_id' => $this->faker->randomDigit(),
+            'board_list_id' => $this->faker->randomDigit(),
             'task_slug' => $this->faker->slug(mt_rand(1, 4)),
             'task_title' => $this->faker->sentence(mt_rand(1, 4)),
             'task_desc' => $this->faker->sentence(5),
-            'label' => $this->faker->sentence(1),
             'due_date' => $this->faker->dateTime(),
         ];
     }
