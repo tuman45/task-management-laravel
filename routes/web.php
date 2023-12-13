@@ -17,11 +17,17 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-Route::get('/', [BoardController::class, 'index']);
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
+Route::get('/', [BoardController::class, 'index'])->middleware('auth');
+
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
 
-Route::get('/{board:board_slug}', [BoardController::class, 'showTask']);
-Route::get('/{board:board_slug}/{task:task_slug}', [TaskController::class, 'showDetail']);
+Route::get('/{board:board_slug}', [TaskController::class, 'showTask'])->middleware('auth');
+Route::get('/{board:board_slug}/{task:task_slug}', [TaskController::class, 'showDetail'])->middleware('auth');
