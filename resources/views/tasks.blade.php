@@ -25,13 +25,32 @@
                      <h4 class="mb-0"> All {{ $title }} </h4>
                   </div>
                   <!-- table  -->
-                  <div class="row mt-3 mb-3 mx-3">
-                     @foreach ($tasks as $task)
-                        <a href="/{{ $task->board->board_slug }}/{{ $task->task_slug }}" class="col-lg-3 my-2 py-1">
-                           <div style="background-color: aqua; height:100px">
-                              <p class="mx-3 fs-4 text-dark">{{ $task->task_title }}</p>
-                           </div>
-                        </a>
+                  <div class="row my-3 mx-3">
+                     @foreach ($boardLists as $boardList)
+                        @php
+                           $tasks = $groupedTasks[$boardList->id] ?? [];
+                        @endphp
+                        <div class="col-lg-4 my-2 py-1">
+                           <table class="table">
+                              <thead>
+                                 <tr class="text-center fw-bold">
+                                    <th class="border fw-bold fs-3 text-dark">{{ $boardList->list_name }}</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 @foreach ($tasks as $task)
+                                    <tr class="border">
+                                       <td class="p-0">
+                                          <a href="/{{ $task->board->board_slug }}/{{ $task->task_slug }}"
+                                             class="text-muted d-block p-3">
+                                             {{ $task->task_title }}
+                                          </a>
+                                       </td>
+                                    </tr>
+                                 @endforeach
+                              </tbody>
+                           </table>
+                        </div>
                      @endforeach
                   </div>
                   <!-- card footer  -->
@@ -42,4 +61,5 @@
             </div>
          </div>
       </div>
-   @endsection
+   </div>
+@endsection
