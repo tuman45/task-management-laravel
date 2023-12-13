@@ -17,4 +17,8 @@ class Board extends Model
     {
         return $this->hasMany(Task::class);
     }
+    public function board_list()
+    {
+        return $this->hasMany(Board_list::class);
+    }
 }

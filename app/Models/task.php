@@ -17,4 +17,8 @@ class Task extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function board_list()
+    {
+        return $this->belongsTo(Board_list::class);
+    }
 }
