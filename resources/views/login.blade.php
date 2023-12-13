@@ -6,29 +6,18 @@
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
-
    <!-- Favicon icon-->
    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon/favicon.ico">
 
    <!-- Libs CSS -->
-
-
    <link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
    <link href="../assets/libs/dropzone/dist/dropzone.css" rel="stylesheet">
    <link href="../assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
    <link href="../assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
 
-
-
-
-
-
-
-
    <!-- Theme CSS -->
    <link rel="stylesheet" href="../assets/css/theme.min.css">
-   <title>Sign In | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+   <title>Sign In</title>
 </head>
 
 <body class="bg-light">
@@ -42,33 +31,39 @@
                <!-- Card body -->
                <div class="card-body p-6">
                   <div class="mb-4">
-                     <a href="../index.html"><img src="../assets/images/brand/logo/logo-primary.svg" class="mb-2"
-                           alt=""></a>
+                     <a href="../index.html"><img src="../assets/images/brand/logo/logo-primary.svg" class="mb-2" alt=""></a>
                      <p class="mb-6">Please enter your user information.</p>
                   </div>
                   <!-- Form -->
                   <form>
                      <!-- Username -->
-                     <div class="mb-3">
-                        <label for="email" class="form-label">Username or email</label>
-                        <input type="email" id="email" class="form-control" name="email"
-                           placeholder="Email address here" required="">
+                     <div class="mb-2">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" id="username" class="form-control @error('username') is-invalid @enderror" name="username" autofocus required value="{{old('username')}}">
+                        @error('username')
+                        <div class="invalid-feedback">
+                           {{$message}}
+                        </div>
+                        @enderror
                      </div>
                      <!-- Password -->
-                     <div class="mb-3">
+                     <div class="mb-2">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" id="password" class="form-control" name="password"
-                           placeholder="**************" required="">
+                        <input type="password" id="password" class="form-control  @error('password') is-invalid @enderror" name="password" required>
+                        @error('password')
+                        <div class="invalid-feedback">
+                           {{$message}}
+                        </div>
+                        @enderror
                      </div>
                      <!-- Checkbox -->
                      <div class="d-lg-flex justify-content-between align-items-center
                   mb-4">
-                        <div class="form-check custom-checkbox">
+                        <!-- <div class="form-check custom-checkbox">
                            <input type="checkbox" class="form-check-input" id="rememberme">
                            <label class="form-check-label" for="rememberme">Remember
                               me</label>
-                        </div>
-
+                        </div> -->
                      </div>
                      <div>
                         <!-- Button -->
@@ -79,14 +74,14 @@
 
                         <div class="d-md-flex justify-content-between mt-4">
                            <div class="mb-2 mb-md-0">
-                              <a href="sign-up.html" class="fs-5">Create An
+                              <a href="/register" class="fs-5">Create An
                                  Account </a>
                            </div>
-                           <div>
+                           <!-- <div>
                               <a href="forget-password.html" class="text-inherit
                         fs-5">Forgot
                                  your password?</a>
-                           </div>
+                           </div> -->
 
                         </div>
                      </div>
@@ -109,9 +104,6 @@
    <script src="../assets/libs/dropzone/dist/min/dropzone.min.js"></script>
    <script src="../assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
    <script src="../assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
-
-
-
 
    <!-- Theme JS -->
    <script src="../assets/js/theme.min.js"></script>
