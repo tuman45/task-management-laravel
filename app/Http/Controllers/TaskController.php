@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\Board_list;
 use App\Models\Task;
+use Illuminate\Routing\Controller;
 
 class TaskController extends Controller
 {
@@ -49,9 +50,24 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Task $task)
+    public function show($board_slug, $taskSlug)
     {
-        //
+        // Ambil board berdasarkan board_slug
+        $board = Board::where('board_slug', $board_slug)->firstOrFail();
+
+        // Ambil task berdasarkan task_slug dan board_id
+        $task = Task::where('task_slug', $taskSlug)
+            ->where('board_id', $board->id)
+            ->first();
+
+        if (!$task) {
+            abort(404); // Task tidak ditemukan
+        }
+
+        return view('detail', [
+            'title' => 'Detail',
+            'task' => $task
+        ]);
     }
 
     /**

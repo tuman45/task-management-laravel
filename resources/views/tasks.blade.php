@@ -41,7 +41,7 @@
                                  @foreach ($tasks as $task)
                                     <tr class="border">
                                        <td class="p-0">
-                                          <a href="/{{ $task->board->board_slug }}/{{ $task->task_slug }}"
+                                          <a href="{{ route('boards.tasks.show', [$board->board_slug, $task->task_slug]) }}"
                                              class="text-muted d-block p-3">
                                              {{ $task->task_title }}
                                           </a>

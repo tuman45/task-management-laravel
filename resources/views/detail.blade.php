@@ -22,10 +22,11 @@
                <div class="card">
                   <!-- card header  -->
                   <div class="card-header bg-white py-4">
-                     <h4 class="mb-2">{{ $details->task_title }} </h4>
+                     <h4 class="mb-2 fw-bold">{{ $task->task_title }} </h4>
                   </div>
                   <div>
-                     <p class="mx-3 fs-4">{{ $details->task_desc }}</p>
+                     <p class="mx-3 fs-4">{{ $task->task_desc }}</p>
+                     <p class="mx-3 fs-4">{{ $task->due_date->diffForHumans() }}</p>
                   </div>
                   <!-- table  -->
 
