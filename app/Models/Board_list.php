@@ -9,6 +9,13 @@ class Board_list extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'board_id',
+        'user_id',
+        'list_name',
+        'order',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
