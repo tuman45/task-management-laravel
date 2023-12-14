@@ -17,13 +17,7 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-// Route::get('/', [BoardController::class, 'index'])->middleware('auth');
-
-Route::resource('/', BoardController::class)->middleware('auth');
-
-Route::get('/board/checkSlug', [BoardController::class, 'checkSlug'])->middleware('auth');
-Route::resource('board', BoardController::class)->middleware('auth');
-
+Route::get('/', [BoardController::class, 'index'])->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
@@ -34,6 +28,10 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 Route::post('/register', [RegisterController::class, 'store']);
 
 // routes/web.php
+Route::get('/board/checkSlug', [BoardController::class, 'checkSlug'])->middleware('auth');
+Route::resource('board', BoardController::class)->middleware('auth');
+Route::resource('boards.tasks', TaskController::class);
 
-Route::resource('{board_slug}', TaskController::class)->middleware('auth');
-Route::resource('{board_slug}/{task_slug}', TaskController::class)->middleware('auth');
+// Route::resource('{board_slug}', TaskController::class)->middleware('auth')->shallow();
+// Route::resource('board-lists', BoardListController::class);
+// Route::resource('tasks', TaskController::class);
