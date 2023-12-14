@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('board_slug')->unique();
+            $table->string('board_slug');
             $table->string('board_name');
             $table->timestamps();
         });
