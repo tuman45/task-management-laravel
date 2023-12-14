@@ -5,17 +5,31 @@
       <div class="col-lg-12 col-md-12 col-12">
          <!-- Page header -->
          <div>
+            @if(session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+               <strong>{{ session('success') }}</strong>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+            @if(session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+               <strong>{{ session('error') }}</strong>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
             <div class="d-flex justify-content-between align-items-center">
                <div class="mb-2 mb-lg-0">
                   <h3 class="mb-0 text-white">{{ $title }}</h3>
                </div>
                <div>
-                  <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                     {{$title}}
+                  <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#boardModal">
+                     Create {{$title}}
                   </button>
                </div>
                <!-- Modal -->
-               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal fade" id="boardModal" tabindex="-1">
                   <div class="modal-dialog">
                      <div class="modal-content">
                         <div class="modal-header">
@@ -23,16 +37,23 @@
                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                           <form action="" method="post">
+                           <form action="/board" method="post">
+                              @csrf
+                              <input type="hidden" id="board_slug" class="form-control" name="board_slug">
                               <div>
-                                 <label class="form-label" for="board">Board Name</label>
-                                 <input class="form-control" type="text" name="board" id="board">
+                                 <label class="form-label" for="board_name">Board Name</label>
+                                 <input type="text" id="board_name" class="form-control @error('board_name') is-invalid @enderror" name="board_name" autofocus>
+                                 @error('board')
+                                 <div class="invalid-feedback">
+                                    {{ $message }}
+                                 </div>
+                                 @enderror
                               </div>
-                           </form>
                         </div>
                         <div class="modal-footer">
                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                           <button type="button" class="btn btn-primary">Save changes</button>
+                           <button type="submit" class="btn btn-primary">Create Board</button>
+                           </form>
                         </div>
                      </div>
                   </div>
@@ -60,11 +81,22 @@
                      @endforeach
                   </div>
                   <!-- card footer  -->
-                  {{-- <div class="card-footer bg-white text-center">
+                  {{-- <div class="card-foo  ter bg-white text-center">
                      <a href="#" class="link-primary">View All Projects</a>
                   </div> --}}
                </div>
             </div>
          </div>
       </div>
+
+      <script>
+         const board = document.querySelector('#board_name');
+         const slug = document.querySelector('#board_slug');
+
+         board.addEventListener('input', function() {
+            fetch('/board/checkSlug?board_name=' + board.value)
+               .then(response => response.json())
+               .then(data => slug.value = data.slug)
+         })
+      </script>
       @endsection
