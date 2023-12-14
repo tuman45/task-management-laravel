@@ -32,7 +32,7 @@ class Board extends Model
     {
         return [
             'board_slug' => [
-                'source' => 'board_name'
+                'source' => ['user.username', 'board_name']
             ]
         ];
     }

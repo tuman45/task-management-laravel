@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('task_slug')->unique();
             $table->string('task_title');
             $table->text('task_desc')->nullable();
-            $table->timestamp('due_date')->nullable();
+            $table->dateTime('due_date')->nullable();
             $table->timestamps();
         });
     }

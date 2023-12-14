@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use App\Models\Board_list;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
@@ -72,8 +73,22 @@ class BoardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Board $board)
+    public function show($boardSlug)
     {
+        // Ambil board berdasarkan slug
+        $board = Board::where('board_slug', $boardSlug)->firstOrFail();
+
+        // Ambil semua board lists yang terkait dengan board
+        $boardLists = Board_list::where('board_id', $board->id)->get();
+
+        // Ambil semua task yang terkait dengan board
+        $tasks = Task::where('board_id', $board->id)->get();
+
+        // Kelompokkan task berdasarkan board_list_id
+        $groupedTasks = $tasks->groupBy('board_list_id');
+
+        $title = 'Tasks';
+        return view('tasks', compact('board', 'boardLists', 'groupedTasks', 'title'));
     }
 
     /**
