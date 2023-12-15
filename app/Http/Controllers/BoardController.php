@@ -17,9 +17,9 @@ class BoardController extends Controller
      */
     public function index()
     {
-        return view('boards', [
+        return view('boards.index', [
             "title" => "Board",
-            "boards" => Board::where('user_id', auth()->user()->id)->get()
+            "boards" => Board::latest()->where('user_id', auth()->user()->id)->get()
         ]);
     }
 
@@ -88,7 +88,7 @@ class BoardController extends Controller
         $groupedTasks = $tasks->groupBy('board_list_id');
 
         $title = 'Tasks';
-        return view('tasks', compact('board', 'boardLists', 'groupedTasks', 'title'));
+        return view('boards.show', compact('board', 'boardLists', 'groupedTasks', 'title'));
     }
 
     /**

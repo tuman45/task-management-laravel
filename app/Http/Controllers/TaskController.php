@@ -23,7 +23,7 @@ class TaskController extends Controller
         $groupedTasks = $tasks->groupBy('board_list_id');
         $boardLists = Board_list::where('board_id', $board->id)->orderBy('order')->get();
 
-        return view('tasks', [
+        return view('boards.show', [
             "title" => "Tasks",
             "board" => $board,
             "groupedTasks" => $groupedTasks,
@@ -64,7 +64,7 @@ class TaskController extends Controller
             abort(404); // Task tidak ditemukan
         }
 
-        return view('detail', [
+        return view('tasks.show', [
             'title' => 'Detail',
             'task' => $task
         ]);
