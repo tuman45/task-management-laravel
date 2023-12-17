@@ -28,6 +28,10 @@ class Board extends Model
         return $this->hasMany(Board_list::class);
     }
 
+    public function getRouteKeyName(): string
+    {
+        return 'board_slug';
+    }
     public function sluggable(): array
     {
         return [

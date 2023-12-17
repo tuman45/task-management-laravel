@@ -17,9 +17,12 @@ class BoardController extends Controller
      */
     public function index()
     {
+        $boards = Board::latest()->where('user_id', auth()->user()->id)->get();
+
         return view('boards.index', [
-            "title" => "Board",
-            "boards" => Board::latest()->where('user_id', auth()->user()->id)->get()
+            'title' => 'Board',
+            'user' => auth()->user(),
+            'boards' => $boards,
         ]);
     }
 
@@ -73,18 +76,10 @@ class BoardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($boardSlug)
+    public function show(Board $board)
     {
-        // Ambil board berdasarkan slug
-        $board = Board::where('board_slug', $boardSlug)->firstOrFail();
-
-        // Ambil semua board lists yang terkait dengan board
         $boardLists = Board_list::where('board_id', $board->id)->get();
-
-        // Ambil semua task yang terkait dengan board
         $tasks = Task::where('board_id', $board->id)->get();
-
-        // Kelompokkan task berdasarkan board_list_id
         $groupedTasks = $tasks->groupBy('board_list_id');
 
         $title = 'Tasks';
@@ -104,7 +99,16 @@ class BoardController extends Controller
      */
     public function update(Request $request, Board $board)
     {
-        //
+        $validatedData = $request->validate([
+            'board_name' => 'required',
+            'board_slug' => 'required',
+        ]);
+
+        $validatedData['user_id'] = auth()->user()->id;
+
+        Board::where('id', $board->id)->update($validatedData);
+
+        return redirect('/boards/' . $validatedData['board_slug'])->with('success', 'Board successfully updated');
     }
 
     /**
@@ -112,12 +116,31 @@ class BoardController extends Controller
      */
     public function destroy(Board $board)
     {
-        //
+        if (!$board) {
+            abort(404, 'Board not found.');
+        }
+
+        try {
+            DB::beginTransaction();
+            Task::where('board_id', $board->id)->delete();
+
+            Board_list::where('board_id', $board->id)->delete();
+            $board->delete();
+
+            DB::commit();
+
+            return redirect('/')->with('success', 'Board successfully deleted');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect('/')->with('error', 'Failed to delete board: ' . $e->getMessage());
+        }
     }
 
     public function checkSlug(Request $request)
     {
-        $slug = SlugService::createSlug(Board::class, 'board_slug', $request->board_name);
+        $user = auth()->user()->username;
+        $slug = SlugService::createSlug(Board::class, 'board_slug', $user . '-' . $request->board_name);
         return response()->json(['slug' => $slug]);
     }
 }

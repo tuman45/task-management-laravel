@@ -22,7 +22,6 @@ class TaskController extends Controller
         $tasks = Task::with(['board', 'board_list'])->where('board_id', $board->id)->get();
         $groupedTasks = $tasks->groupBy('board_list_id');
         $boardLists = Board_list::where('board_id', $board->id)->orderBy('order')->get();
-
         return view('boards.show', [
             "title" => "Tasks",
             "board" => $board,
@@ -34,9 +33,12 @@ class TaskController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($board_slug)
     {
-        //
+        return view('tasks.create', [
+            'title' => 'Create New Task',
+            'board' => Board::where('board_slug', $board_slug)->firstOrFail(),
+        ]);
     }
 
     /**
@@ -44,7 +46,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
